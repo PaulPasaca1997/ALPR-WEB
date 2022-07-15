@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table class="table table-borderless">
+    <thead class="border-bottom font-weight-bold" >
+        <tr>
+            <th>Cedula</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Editar</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for usuario in lista %}
+            <tr>
+                <td>{{usuario.cedula}}</td>
+                <td>{{usuario.nombre}}</td>
+                <td>{{usuario.apellido}}</td>
+                <td>{{usuario.email}}</td>
+                <td>{{usuario.rol}}</td>
+                <td>
+                   <a href="{% url  'usuario_edit' usuario.id %}" class"btn text-secondary px-0">
+                    <i class="far fa-edit fa-lg"></i> 
+                   </a>
+                  
+
+                   <form action="{% url  'usuario_delete' usuario.id %}" method="post" class="d-inline" >  
+                        {% csrf_token %}
+                        <button> 
+                            <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                        </button >  
+                 
+                    </form>
+                 
+
+                </td>
+
+            </tr>
+
+        {% endfor %} 
+    </tbody>
+</table>
+
+{%endblock content %}
